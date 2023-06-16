@@ -1,8 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
-import csv
-from concurrent.futures import ThreadPoolExecutor
+import pandas as pd
 from datetime import datetime, timedelta
+
+
 
 
 
@@ -26,7 +27,7 @@ def get_data_for_current_date():
 
     # Find all the rows in the table on the website
     rows = soup.find('table', {'class': 'tinytable'}).find('tbody').findAll('tr')
-
+    field_names = ['transaction_date','trade_date', 'ticker', 'company_name', 'owner_name', 'Title' ,'transaction_type', 'last_price', 'Qty', 'shares_held', 'Owned', 'Value']
     # Loop through each row and extract the insider transaction data
     for row in rows:
         if not row.findAll('td'):
@@ -47,8 +48,11 @@ def get_data_for_current_date():
         # Add the Data to the Stack
         data.add(tuple(insider_data.values()))
     print(data)
-    return data
+    print(type(data))
 
+
+
+    return data
 
 
 
