@@ -1,0 +1,6 @@
+boto3
+python-dotenv
+datetime
+requests
+beautifulsoup4
+pandas

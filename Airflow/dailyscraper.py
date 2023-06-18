@@ -1,15 +1,19 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-from datetime import datetime, timedelta
-
-
+from datetime import datetime
 
 
 
 ## Credits to  https://github.com/sd3v/openinsiderData/blob/main/openinsider_scraper.py for base code
 
 def get_data_for_current_date():
+    """
+    
+    Gets the current dates data using beatifulsoup
+    
+    
+    """
     # Set the start date and end date for the given month
     current_date = datetime.now()
     formatted_date = current_date.strftime("%m/%d/%Y")
@@ -47,14 +51,27 @@ def get_data_for_current_date():
         insider_data['Value'] = row.findAll('td')[12].text.strip()
         # Add the Data to the Stack
         data.add(tuple(insider_data.values()))
-    print(data)
-    print(type(data))
+    df = pd.DataFrame(data, columns=field_names)
 
+    ## Changes
 
-
-    return data
-
-
+    df['last_price'] = pd.to_numeric(df['last_price'].str[1:].str.replace(',', ''))
+    df['Qty'] = pd.to_numeric(df['Qty'].str[1:].str.replace(',', ''))
+    df['Value'] = pd.to_numeric(df['Value'].str[2:].str.replace(',', ''))
+    df['shares_held'] = pd.to_numeric(df['shares_held'].str.replace(',', ''))
+    
+    df.to_csv('./downloads/test.csv', index=False)
 
     
-get_data_for_current_date()
+    return df
+
+    
+    
+    
+
+
+
+
+
+if __name__ == "__main__":
+    get_data_for_current_date()
