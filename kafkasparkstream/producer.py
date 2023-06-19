@@ -25,6 +25,9 @@ producer = KafkaProducer(
 
 
 
+
+
+
 message = {'test' : 'test1'}
 
 producer.send()

@@ -17,15 +17,16 @@ def get_data_for_current_date():
     # Set the start date and end date for the given month
     current_date = datetime.now()
     formatted_date = current_date.strftime("%m/%d/%Y")
-
+    testingdate = '06/16/2023'
  
 
     # Initialize an empty set to store the data for the month
     data = set()
 
     # Make a request to the website
-    url = f'http://openinsider.com/screener?s=&o=&pl=&ph=&ll=&lh=&fd=-1&fdr={formatted_date}+-+{formatted_date}&td=0&tdr=&fdlyl=&fdlyh=&daysago=&xp=1&xs=1&vl=&vh=&ocl=&och=&sic1=-1&sicl=100&sich=9999&grp=0&nfl=&nfh=&nil=&nih=&nol=&noh=&v2l=&v2h=&oc2l=&oc2h=&sortcol=0&cnt=5000&page=1'
+    url = f'http://openinsider.com/screener?s=&o=&pl=&ph=&ll=&lh=&fd=-1&fdr={testingdate}+-+{testingdate}&td=0&tdr=&fdlyl=&fdlyh=&daysago=&xp=1&xs=1&vl=&vh=&ocl=&och=&sic1=-1&sicl=100&sich=9999&grp=0&nfl=&nfh=&nil=&nih=&nol=&noh=&v2l=&v2h=&oc2l=&oc2h=&sortcol=0&cnt=5000&page=1'
     response = requests.get(url)
+    print(url)
     # Parse the HTML response
     soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -60,7 +61,7 @@ def get_data_for_current_date():
     df['Value'] = pd.to_numeric(df['Value'].str[2:].str.replace(',', ''))
     df['shares_held'] = pd.to_numeric(df['shares_held'].str.replace(',', ''))
     
-    df.to_csv('./downloads/test.csv', index=False)
+    df.to_csv('/downloads/test.csv', index=False)
 
     
     return df
