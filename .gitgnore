@@ -1,7 +1,7 @@
 .env
 .gitignore
-Airflow/dags/.env
-Airflow/logs
-Airflow/plugins
-Airflow/downloads   
-
+./Airflow/dags/.env
+./Airflow/logs
+./Airflow/plugins
+./Airflow/downloads 
+Airflow/logs/scheduler/latest
