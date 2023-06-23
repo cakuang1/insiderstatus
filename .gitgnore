@@ -5,5 +5,5 @@
 ./Airflow/logs
 ./Airflow/plugins
 ./Airflow/downloads 
-./kafkasparkstream/.env
+kafkasparkstream/.env
 Airflow/logs/scheduler/latest
