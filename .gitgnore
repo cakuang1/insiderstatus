@@ -1,7 +1,9 @@
 .env
 .gitignore
+
 ./Airflow/dags/.env
 ./Airflow/logs
 ./Airflow/plugins
 ./Airflow/downloads 
+./kafkasparkstream/.env
 Airflow/logs/scheduler/latest
